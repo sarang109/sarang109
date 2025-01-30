@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarang Kulkarni | Data Scientist</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2A9D8F;
+            --secondary-color: #264653;
+            --accent-color: #E76F51;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: #f8f9fa;
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            background-color: var(--secondary-color)!important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            transition: all 0.3s;
+        }
+
+        .nav-link {
+            position: relative;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover:before,
+        .nav-link.active:before {
+            width: 100%;
+            left: 0;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #1d3557 100%);
+            color: white;
+            padding: 150px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section:before {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="%23f8f9fa" fill-opacity="1" d="M0,160L48,138.7C96,117,192,75,288,80C384,85,480,139,576,165.3C672,192,768,192,864,181.3C960,171,1056,149,1152,133.3C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat;
+            background-size: cover;
+        }
+
+        .profile-image {
+            border: 5px solid var(--primary-color);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+
+        .section-title {
+            color: var(--secondary-color);
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 40px;
+        }
+
+        .section-title:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 30px;
+            width: 5px;
+            background: var(--primary-color);
+        }
+
+        .timeline {
+            border-left: 3px solid var(--primary-color);
+            padding-left: 25px;
+            margin-left: 15px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 30px;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--primary-color);
+        }
+
+        .project-card {
+            transition: transform 0.3s;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card img {
+            transition: transform 0.3s;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(42, 157, 143, 0.9);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .download-btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 30px 0;
+        }
+
+        .social-icon {
+            font-size: 24px;
+            color: white;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .social-icon:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: var(--secondary-color);
+                padding: 1rem;
+                margin-top: 10px;
+                border-radius: 10px;
+            }
+            
+            .dropdown-menu {
+                background: rgba(0,0,0,0.2);
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+        }
+    </style>
+
+    <style>
+        :root {
+            /* Add these new typography variables */
+            --heading-font: 'Inter', system-ui, sans-serif;
+            --body-font: 'Inter', system-ui, sans-serif;
+            --letter-spacing: 0.5px;
+            --line-height: 1.6;
+        }
+        
+        body {
+            font-family: var(--body-font);
+            letter-spacing: var(--letter-spacing);
+            line-height: var(--line-height);
+            font-weight: 400;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--heading-font);
+            letter-spacing: -0.25px;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+        
+        /* Section Titles */
+        .section-title {
+            font-size: 2.25rem;
+            letter-spacing: -0.5px;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+        }
+        
+        /* Hero Section Typography */
+        .hero-section h1 {
+            font-size: 3.5rem;
+            letter-spacing: -1px;
+            line-height: 1.15;
+            font-weight: 700;
+        }
+        
+        /* Project Cards */
+        .project-card h5 {
+            font-size: 1.25rem;
+            letter-spacing: -0.15px;
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Timeline Items */
+        .timeline-item h4 {
+            font-size: 1.3rem;
+            letter-spacing: -0.2px;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Add this to your existing CSS */
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: -0.25px;
+        }
+        
+        .download-btn {
+            letter-spacing: 0.75px;
+            font-weight: 500;
+        }
+        
+        /* Optional: Text shadow for headings */
+        .hero-section h1 {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+
+    <style>
+        .skill-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            margin: 5px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: transform 0.2s;
+        }
+        
+        .skill-badge:hover {
+            transform: translateY(-2px);
+        }
+        
+        .skill-category {
+            transition: transform 0.3s;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+        
+        .progress-bar {
+            background-color: var(--primary-color);
+        }
+        
+        .algorithm-list h4 {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .badge.bg-secondary {
+            background-color: var(--accent-color) !important;
+            margin: 3px;
+            font-weight: 500;
+        }
+        </style>
+<style>
+    /* Add these styles to your existing CSS */
+    .display-2 {
+        font-size: 4rem;
+        letter-spacing: -1.5px;
+    }
+    
+    .display-5 {
+        font-size: 1.8rem;
+        letter-spacing: -0.5px;
+    }
+    
+    @media (max-width: 768px) {
+        .display-2 {
+            font-size: 2.5rem;
+        }
+        .display-5 {
+            font-size: 1.4rem;
+        }
+    }
+    </style>
+    
+        
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-chart-line me-2"></i>Sarang Kulkarni's Portfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown d-lg-none">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-bars me-2"></i>Menu
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="#experience"><i class="fas fa-briefcase me-2"></i>Experience</a></li>
+                            <li><a class="dropdown-item" href="#education"><i class="fas fa-graduation-cap me-2"></i>Education</a></li>
+                            <li><a class="dropdown-item" href="#projects"><i class="fas fa-code-branch me-2"></i>Projects</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#resume"><i class="fas fa-file-pdf me-2"></i>Resume</a></li>
+                        </ul>
+                    </li>
+                    <div class="d-none d-lg-flex">
+                        <li class="nav-item"><a class="nav-link" href="#experience"><i class="fas fa-briefcase me-1"></i>Experience</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#education"><i class="fas fa-graduation-cap me-1"></i>Education</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#projects"><i class="fas fa-code-branch me-1"></i>Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#resume"><i class="fas fa-file-pdf me-1"></i>Resume</a></li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <!-- <section class="hero-section" id="summary">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="display-4 mb-3">Sarang Kulkarni</h1>
+                    <h3 class="lead">Data Scientist</h3>
+                    <h3 class="lead">Turning complex data into actionable insights through machine learning and advanced analytics</h3>
+                    <a href="Sarang_Kulkarni.pdf" class="download-btn mt-3" download>
+                        <i class="fas fa-download me-2"></i>Download Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="summary">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="display-4 mb-3">Sarang Kulkarni</h1>
+                    <h3 class="lead">Data Scientist</h3>
+                    <h3 class="lead">Turning complex data into actionable insights through machine learning and advanced analytics</h3>
+                    <!-- <button class="download-btn mt-3"><i class="fas fa-download me-2"></i>Download Resume</button> -->
+                    <a href="Sarang_Kulkarni.pdf" class="download-btn mt-3" download>
+                        <i class="fas fa-download me-2"></i>Download Resume
+                    </a>
+                </div>
+                <!-- <div class="col-md-6 text-center">
+                    <img src="profile-placeholder.jpg" alt="Profile" class="img-fluid rounded-circle" style="max-width: 300px;">
+                </div> -->
+            </div>
+        </div>
+    </section>
+    
+
+
+    <section class="py-5" id="summary">
+        <div class="container">
+            <h2 class="section-title">Professional Summary</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <p class="lead text-muted">
+                        Data Scientist with 5+ years of experience in designing and implementing machine learning solutions. 
+                        Proven expertise in predictive analytics, deep learning, and cloud-based ML deployments. 
+                        Strong track record of transforming complex data into actionable insights through advanced 
+                        statistical modeling and data visualization. Passionate about developing end-to-end ML pipelines 
+                        and optimizing models for production environments.
+                    </p>
+                    <div class="text-center mt-4">
+                        <div class="badge bg-primary me-2">MLOps</div>
+                        <div class="badge bg-primary me-2">Predictive Modeling</div>
+                        <div class="badge bg-primary me-2">Data Architecture</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Experience Section -->
+    <section class="py-5" id="experience">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Data Scientist</h4>
+                    <p class="text-muted">701x Inc. | May 2024-Jan 2025</p>
+                    <ul>
+                        <li>Built and maintained a CICD ML pipeline leveraging docker, kubernetes and Azure ML resulting in reduced
+                            downtime.</li>
+                        <li>Performed advanced EDA on IMU and health sensor data using Python (pandas, numpy) and Seaborn,
+                            identifying key patterns and correlations. Effectively communicated findings through data visualizations
+                            and tailored presentations for non-technical stakeholders.</li>
+                        <li>Developed ML model for livestock activity classification using Python and Tensorflow thereby achieved 80%
+                            accuracy(precision).</li>
+                        <li>Developed dashboards using Tableau addressing stakeholders, marketing team with KPI’s which increased
+                            product sale by 78%</li>
+                    </ul>
+                </div>
+                <!-- Add more timeline items -->
+                <div class="timeline-item">
+                    <h4>Data Scientist</h4>
+                    <p class="text-muted">FIS Global Inc. | Aug 2019-Aug 2023</p>
+                    <ul>
+                        <li>Built and maintained multiple ML pipelines using docker and kubernetes along with AWS AI/ML and Azure
+                            Machine Learning.</li>
+                        <li>Developed Machine Learning model for credit underwriting process using Python and Tensorflow reducing
+                            manual workload by 73%.</li>
+                        <li>Automated the extraction and processing of large datasets from legacy systems using SQL and VBA scripts
+                            which saved 20 hours per week.</li>
+                        <li>Successfully transferred millions of data from legacy system to new system using ETL Tools, advanced SQL
+                            queries, thereby leveraging Excel for data reconciliation ensuring complete data transfer.</li>
+                    </ul>
+                </div>
+                <!-- Add more timeline items -->    
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Skills Section -->
+    <section class="py-5 bg-light" id="skills">
+        <div class="container">
+            <h2 class="section-title mb-5">Technical Skills</h2>
+            
+            <!-- Radar Chart for Core Skills -->
+            <div class="row mb-5">
+                <div class="col-md-6">
+                    <div class="skill-chart p-4">
+                        <div class="radar-chart" style="position: relative; height: 300px;">
+                            <!-- Add radar chart using Chart.js or similar library -->
+                            <canvas id="skillsRadar"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="skill-bars">
+                        <h4 class="mb-4"><i class="fas fa-star me-2"></i>Key Proficiencies</h4>
+                        <div class="skill-item mb-3">
+                            <div class="d-flex justify-content-between">
+                                <span>Python</span>
+                                <span>96%</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <!-- Add more progress bars -->
+                        <div class="skill-item mb-3">
+                            <div class="d-flex justify-content-between">
+                                <span>Machine Learning</span>
+                                <span>92%</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <!-- Add more progress bars -->
+                        <div class="skill-item mb-3">
+                            <div class="d-flex justify-content-between">
+                                <span>Deep Learning</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <!-- Add more progress bars -->
+                        <div class="skill-item mb-3">
+                            <div class="d-flex justify-content-between">
+                                <span>SQL | NoSQL</span>
+                                <span>96.5%</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <!-- Add more progress bars -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categorized Skills -->
+            <div class="row">
+                <!-- Technologies -->
+                <div class="col-md-4 mb-4">
+                    <div class="card skill-category">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-laptop-code me-2"></i>Technologies</h5>
+                            <div class="skill-badge">Python</div>
+                            <div class="skill-badge">R</div>
+                            <div class="skill-badge">SQL</div>
+                            <div class="skill-badge">Docker</div>
+                            <div class="skill-badge">Kubernetes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cloud & DevOps -->
+                <div class="col-md-4 mb-4">
+                    <div class="card skill-category">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-cloud me-2"></i>Cloud & DevOps</h5>
+                            <div class="skill-badge">AWS</div>
+                            <div class="skill-badge">Azure</div>
+                            <div class="skill-badge">GCP</div>
+                            <div class="skill-badge">MLFlow</div>
+                            <div class="skill-badge">Vertex AI</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Visualization -->
+                <div class="col-md-4 mb-4">
+                    <div class="card skill-category">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-chart-bar me-2"></i>Visualization</h5>
+                            <div class="skill-badge">Tableau</div>
+                            <div class="skill-badge">Power BI</div>
+                            <div class="skill-badge">Matplotlib</div>
+                            <div class="skill-badge">Seaborn</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ML/DL Algorithms -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="algorithm-list">
+                        <h4><i class="fas fa-brain me-2"></i>Machine Learning</h4>
+                        <div class="ms-3">
+                            <span class="badge bg-secondary">Random Forest</span>
+                            <span class="badge bg-secondary">Decision Trees</span>
+                            <span class="badge bg-secondary">XGBoost</span>
+                            <span class="badge bg-secondary">SVM</span>
+                            <span class="badge bg-secondary">Linear Regression</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="algorithm-list">
+                        <h4><i class="fas fa-network-wired me-2"></i>Deep Learning</h4>
+                        <div class="ms-3">
+                            <span class="badge bg-secondary">CNN</span>
+                            <span class="badge bg-secondary">RNN</span>
+                            <span class="badge bg-secondary">LSTM</span>
+                            <span class="badge bg-secondary">GRU</span>
+                            <span class="badge bg-secondary">Transformers</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="py-5 bg-light" id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h4>MS in Artificial Intelligence</h4>
+                            <p class="text-muted"> University of Michigan | Aug 2022-April 2024</p>
+                            <p>GPA: 3.9/4.0</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more education items -->
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h4>BEng. in Computer Engineering</h4>
+                            <p class="text-muted"> University of Pune | Aug 2017-April 2021</p>
+                            <p>GPA: 7.85/10.00</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more education items -->
+            </div>
+        </div>
+    </section>
+
+<!-- Projects Section -->
+<section class="py-5" id="projects">
+    <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="row g-4">
+            <!-- Project 1 -->
+            <div class="col-md-4">
+                <div class="card project-card">
+                    <img src="project1.jpg" class="card-img-top" alt="Speech Emotion Recognition">
+                    <div class="card-body">
+                        <h5 class="card-title">Speech Emotion Recognition</h5>
+                        <p class="card-text">Spearheaded real time emotion detections from speech using raw audio files and designed a neural network
+                            classifying 6 emotions.</p>
+                        <div class="badge bg-primary">Python</div>
+                        <div class="badge bg-primary">TensorFlow</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="col-md-4">
+                <div class="card project-card">
+                    <img src="project2.jpg" class="card-img-top" alt="Calving Detection">
+                    <div class="card-body">
+                        <h5 class="card-title">Calving Detection</h5>
+                        <p class="card-text">Successfully detected calving in cows 2 weeks before actual calving date using ML and applied quantization
+                            for efficient deployment.</p>
+                        <div class="badge bg-primary">Python</div>
+                        <div class="badge bg-primary">TensorFlow</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="col-md-4">
+                <div class="card project-card">
+                    <img src="project3.jpg" class="card-img-top" alt="Project 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Project Title 3</h5>
+                        <p class="card-text">Description of your third project goes here. Explain the technologies used and your contribution.</p>
+                        <div class="badge bg-primary">Technology 1</div>
+                        <div class="badge bg-primary">Technology 2</div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Closing row div -->
+    </div>
+</section>
+
+    <!-- Resume Section -->
+    <section class="py-5 bg-light" id="resume">
+        <div class="container text-center">
+            <h2 class="section-title mb-4">Download Resume</h2>
+            <a href="Sarang_Kulkarni.pdf" class="download-btn" download>
+                <i class="fas fa-file-pdf me-2"></i>Download Full Resume
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <div class="social-icons mb-4">
+                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-kaggle"></i></a>
+            </div>
+            <p>© 2025 Sarang Kulkarni. All rights reserved</p>
+        </div>
+    </footer>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" style="height: 3px; background: var(--primary-color); position: fixed; top: 0; left: 0; z-index: 9999; width: 0%;"></div>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="btn btn-primary rounded-circle shadow" 
+            style="position: fixed; bottom: 30px; right: 30px; display: none; width: 50px; height: 50px;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scroll and active navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if(target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Active link tracking
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if(rect.top <= 150 && rect.bottom >= 150) {
+                        const id = section.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                        });
+                    }
+                });
+            });
+
+            // Scroll progress
+            window.addEventListener('scroll', function() {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.querySelector('.scroll-progress').style.width = scrolled + "%";
+            });
+
+            // Back to top button
+            const backToTopBtn = document.getElementById('backToTop');
+            window.addEventListener('scroll', function() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    backToTopBtn.style.display = "block";
+                } else {
+                    backToTopBtn.style.display = "none";
+                }
+            });
+
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    <!-- Add Chart.js for radar chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    // Radar Chart Configuration
+    const ctx = document.getElementById('skillsRadar').getContext('2d');
+    new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['ML/DL', 'Cloud', 'Visualization', 'Programming', 'DevOps'],
+            datasets: [{
+                label: 'Skill Level',
+                data: [9, 8, 8, 9, 7],
+                backgroundColor: 'rgba(42, 157, 143, 0.2)',
+                borderColor: 'rgba(42, 157, 143, 1)',
+                pointBackgroundColor: 'rgba(42, 157, 143, 1)',
+                pointBorderColor: '#fff',
+            }]
+        },
+        options: {
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 10,
+                    ticks: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+    </script>
+</body>
+</html>
